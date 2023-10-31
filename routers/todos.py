@@ -1,4 +1,3 @@
-from typing import Annotated
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, Path, Request, Form
 from starlette import status
@@ -31,10 +30,6 @@ def get_db():
         yield db
     finally:
         db.close()
-
-
-db_dependency = Annotated[Session, Depends(get_db)]
-user_dependency = Annotated[dict, Depends(get_current_user)]
 
 
 @router.get("/", response_class=HTMLResponse)
